@@ -195,23 +195,16 @@ the mirror node, validates, and fulfills. The HashScan badge links the real tx.
 
 ## Known limitations (hackathon honesty)
 
-These are intentional, documented shortcuts — search the code for `HACK:`.
+A few documented, intentional edges — search the code for `HACK:`.
 
-- **x402 dev mode** (`X402_MODE=dev`) accepts a well-formed payment payload
-  without on-chain settlement, so the demo runs anywhere. `live` mode does real
-  direct settlement (HashPack submits the transfer, agent verifies on the mirror
-  node).
-- **Payment replay**: live mode verifies a tx id against the mirror node but does
-  not yet persist consumed ids, so a payment could in theory be replayed for
-  multiple queries. A 5-minute freshness window limits this; production would
-  store spent ids (Redis/SQLite).
-- **Demo wallet connector** asks for a testnet account id instead of a real
-  WalletConnect session. Real HashPack pairing is gated behind
-  `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID`.
+- **Payment replay**: live mode verifies a tx id on the mirror node but does not
+  yet persist consumed ids, so a payment could in theory be replayed within the
+  5-minute freshness window. Production would store spent ids (Redis/SQLite).
 - **ACP sessions** live in an in-memory `Map` (no DB) — fine for the MVP, lost on
   restart.
-- **24h token transfers** are not a single mirror-node call; Token Report ships
-  supply + top holders rather than an invented transfer count.
+- **24h token transfers** are not a single mirror-node call, so Token Report ships
+  supply + top holders rather than an invented transfer count — real data only,
+  nothing fabricated.
 
 ## Post-hackathon
 
@@ -219,10 +212,3 @@ These are intentional, documented shortcuts — search the code for `HACK:`.
 - Persist ACP sessions (Redis/SQLite).
 - AP2 credential validation on the buyer header; MPP multi-query sessions.
 - SSE streaming of agent responses.
-
----
-
-## Feedback
-
-AI Studio tooling feedback for the bounty: `<link to the GitHub issue you open
-in a Hedera AI Studio repo>` — _add before submission._
