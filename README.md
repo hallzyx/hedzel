@@ -12,13 +12,15 @@ makes each micropayment worth paying.
 
 ---
 
-## Live demo
+## Demo (run locally)
 
-- **App (chat UI):** `<RAILWAY_WEB_URL>` — _fill in after deploy_
-- **Agent API (catalog):** `<RAILWAY_AGENT_URL>/catalog`
+Runs entirely on your machine — see [Run it locally](#run-it-locally).
 
-> Hosted on Railway. A keep-alive health check (`/health`) is pinged every 14
-> days to satisfy the 90-day availability requirement.
+- **App (chat UI):** <http://localhost:3000>
+- **Agent API (catalog):** <http://localhost:3001/catalog>
+
+Other agents can buy from it through the published MCP server — see
+[Buy from another AI agent (MCP)](#buy-from-another-ai-agent-mcp).
 
 ---
 
