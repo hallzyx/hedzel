@@ -1,0 +1,16 @@
+{
+  "name": "hedera-insights-agent",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Commerce Agent on Hedera that sells real-time on-chain intelligence, paid per request in HBAR via x402.",
+  "packageManager": "pnpm@10.24.0",
+  "scripts": {
+    "dev": "pnpm --parallel --filter ./packages/* dev",
+    "dev:agent": "pnpm --filter @hedera-insights/agent dev",
+    "dev:web": "pnpm --filter @hedera-insights/web dev",
+    "build": "pnpm --filter @hedera-insights/agent build && pnpm --filter @hedera-insights/web build"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

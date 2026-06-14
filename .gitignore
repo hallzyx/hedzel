@@ -1,0 +1,29 @@
+node_modules/
+dist/
+.next/
+out/
+build/
+
+# env
+.env
+.env.local
+.env.*.local
+packages/agent/.env
+packages/web/.env.local
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# os / editor
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.tsbuildinfo
+
+# local agent tooling (not part of the project)
+.atl/
+.claude/
+.playwright-mcp/
