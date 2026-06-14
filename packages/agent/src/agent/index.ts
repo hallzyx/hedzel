@@ -112,9 +112,9 @@ function withTimeout<T>(p: Promise<T>, ms = LLM_TIMEOUT_MS): Promise<T> {
 }
 
 /**
- * Build a plain chat model. Used for the fast paths (intent + conversation +
- * summary) that need text in, text out — NOT the full Hedera Agent Kit toolkit,
- * whose heavy init must never sit on the request hot path.
+ * Build a plain chat model. Used for the fast hot paths (intent + conversation)
+ * and as the summary fallback — NOT the full Hedera Agent Kit toolkit, whose
+ * heavier init must never sit on the typing hot path.
  */
 async function makeLlm() {
   if (!env.llm.apiKey) return null;
@@ -133,18 +133,49 @@ function llmText(content: unknown): string {
   return typeof content === "string" ? content : JSON.stringify(content);
 }
 
-/** Produce a short natural-language summary of an insight result. */
+function summaryPrompt(result: InsightResult): string {
+  return (
+    `Summarise this Hedera ${result.service_id} result in 2-3 sentences for a ` +
+    `non-technical user. Reply in the user's likely language. ` +
+    `Data: ${JSON.stringify(result.data)}`
+  );
+}
+
+/**
+ * Produce a short natural-language summary of an insight result.
+ *
+ * Primary path: the **Hedera Agent Kit v4** agent (a LangChain agent wired with
+ * the mirror + native Hedera tools) — this is what the project's "Built with
+ * Hedera Agent Kit" runs on. The whole Agent-Kit path (lazy init + invoke) is
+ * time-boxed so a slow load never hangs the request; on timeout or failure it
+ * falls back to a plain LLM summary so the paid data path is never blocked.
+ */
 export async function summarise(result: InsightResult): Promise<string | null> {
+  try {
+    const viaAgentKit = await withTimeout(summariseWithAgentKit(result));
+    if (viaAgentKit && viaAgentKit.trim()) return viaAgentKit.trim();
+  } catch {
+    /* Agent Kit unavailable/slow — fall back to a plain LLM summary. */
+  }
+  return summariseWithLlm(result);
+}
+
+/** Summarise via the Hedera Agent Kit agent. Null if the kit/LLM can't load. */
+async function summariseWithAgentKit(result: InsightResult): Promise<string | null> {
+  const agent = await getAgent();
+  if (!agent) return null;
+  const res = await agent.invoke({
+    messages: [{ role: "user", content: summaryPrompt(result) }],
+  });
+  return extractOutput(res);
+}
+
+/** Resilient fallback so summaries survive an Agent-Kit hiccup. */
+async function summariseWithLlm(result: InsightResult): Promise<string | null> {
   const llm = await makeLlm();
   if (!llm) return null;
   try {
-    const res = await withTimeout(
-      llm.invoke(
-        `Summarise this Hedera ${result.service_id} result in 2-3 sentences for a ` +
-          `non-technical user. Reply in the user's likely language. ` +
-          `Data: ${JSON.stringify(result.data)}`,
-      ),
-    );
+    const res = await withTimeout(llm.invoke(summaryPrompt(result)));
     return llmText(res.content);
   } catch {
     return null;
