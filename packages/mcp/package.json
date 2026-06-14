@@ -1,6 +1,6 @@
 {
   "name": "hedera-insights-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP server that lets any AI agent buy Hedera on-chain intelligence over x402 — discovers the catalog, pays in HBAR, and returns verified data.",
   "type": "module",
   "license": "MIT",
@@ -25,7 +25,7 @@
     "on-chain"
   ],
   "bin": {
-    "hedera-insights-mcp": "dist/index.js"
+    "hedera-insights-mcp": "dist/index.cjs"
   },
   "files": [
     "dist"
@@ -34,20 +34,21 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "start": "node dist/index.js",
-    "config": "node dist/index.js config",
+    "clean": "rimraf dist",
+    "build": "rimraf dist && esbuild src/index.ts --bundle --platform=node --format=cjs --target=node20 --minify --outfile=dist/index.cjs",
+    "start": "node dist/index.cjs",
+    "config": "node dist/index.cjs config",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "prepublishOnly": "npm run build"
   },
-  "dependencies": {
+  "devDependencies": {
     "@hiero-ledger/sdk": "2.79.0",
     "@modelcontextprotocol/sdk": "^1.29.0",
-    "zod": "^3.23.8"
-  },
-  "devDependencies": {
     "@types/node": "^22.7.0",
-    "typescript": "^5.6.0"
+    "esbuild": "^0.24.0",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.6.0",
+    "zod": "^3.23.8"
   },
   "engines": {
     "node": ">=20"

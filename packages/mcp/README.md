@@ -130,7 +130,7 @@ comes back with a HashScan proof link.
 ```bash
 pnpm install
 pnpm --filter hedera-insights-mcp build
-node packages/mcp/dist/index.js config   # print client configs
+node packages/mcp/dist/index.cjs config   # print client configs
 ```
 
 Diagnostics go to **stderr** (stdout is the JSON-RPC channel).

@@ -9,6 +9,7 @@
  * Transport: stdio. IMPORTANT: never write to stdout except the JSON-RPC channel
  * — all diagnostics go to stderr (console.error).
  */
+import "./harden.js"; // MUST be first: keeps stdout pure for JSON-RPC before any SDK loads.
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
