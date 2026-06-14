@@ -1,0 +1,31 @@
+{
+  "name": "@hedera-insights/mcp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MCP server that lets any AI agent buy Hedera on-chain intelligence over x402 — discovers the catalog, pays in HBAR, and returns verified data.",
+  "type": "module",
+  "bin": {
+    "hedera-insights-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "config": "node dist/index.js config",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@hiero-ledger/sdk": "2.79.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
