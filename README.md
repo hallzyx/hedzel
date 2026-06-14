@@ -110,17 +110,19 @@ mirror node actually returns rather than inventing a number.
 
 ## Buy from another AI agent (MCP)
 
-The agent-to-agent path ships as an **MCP server** (`packages/mcp`) so any
-MCP-capable agent — **Claude Code, Claude Desktop, OpenCode**, … — can discover,
-pay for and consume the same services with no UI and no human. The server signs
-and submits the HBAR transfer headlessly with a configured wallet; the calling
-agent just asks _"buy account intelligence for 0.0.2"_.
+The agent-to-agent path ships as an **MCP server** — published on npm as
+[`hedera-insights-mcp`](https://www.npmjs.com/package/hedera-insights-mcp)
+(`packages/mcp`) — so any MCP-capable agent (**Claude Code, Claude Desktop,
+OpenCode**, …) can discover, pay for and consume the same services with no UI and
+no human. The server signs and submits the HBAR transfer headlessly with a
+configured wallet; the calling agent just asks _"buy account intelligence for 0.0.2"_.
 
 ```bash
 npx -y hedera-insights-mcp config   # prints ready-to-paste Claude & OpenCode configs
 ```
 
-Same binary, two client schemas (both from official docs). See
+It's bundled into a **single dependency-free file** (~584 kB) so `npx` cold-starts
+in seconds. Same binary, two client schemas (both from official docs). See
 [`packages/mcp/README.md`](./packages/mcp/README.md) for the full setup.
 
 ---

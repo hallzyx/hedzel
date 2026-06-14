@@ -11,6 +11,15 @@ service a human uses through the chat UI, exposed as tools any agent can call.
 > The server signs and submits the HBAR transfer **headlessly** with the operator
 > key (`@hiero-ledger/sdk`) — no WalletConnect, no wallet popup.
 
+**On npm:** [`hedera-insights-mcp`](https://www.npmjs.com/package/hedera-insights-mcp).
+Shipped as a **single-file, dependency-free bundle** (~584 kB) — `npx` downloads one
+file instead of resolving the whole Hedera SDK tree, so it cold-starts in a few
+seconds, well within MCP clients' startup timeouts.
+
+```bash
+npx -y hedera-insights-mcp config   # print ready-to-paste configs
+```
+
 ---
 
 ## Tools
