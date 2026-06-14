@@ -1,6 +1,6 @@
 {
   "name": "hedera-insights-mcp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "MCP server that lets any AI agent buy Hedera on-chain intelligence over x402 — discovers the catalog, pays in HBAR, and returns verified data.",
   "type": "module",
   "license": "MIT",
