@@ -117,7 +117,7 @@ and submits the HBAR transfer headlessly with a configured wallet; the calling
 agent just asks _"buy account intelligence for 0.0.2"_.
 
 ```bash
-npx -y @hedera-insights/mcp config   # prints ready-to-paste Claude & OpenCode configs
+npx -y hedera-insights-mcp config   # prints ready-to-paste Claude & OpenCode configs
 ```
 
 Same binary, two client schemas (both from official docs). See

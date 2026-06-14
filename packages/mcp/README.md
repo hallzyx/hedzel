@@ -1,4 +1,4 @@
-# @hedera-insights/mcp
+# hedera-insights-mcp
 
 An **MCP server** that lets any MCP-capable AI agent buy **Hedera on-chain
 intelligence** over **x402** — it discovers the catalog, pays the HBAR fee from a
@@ -48,7 +48,7 @@ server holds a hot key.
 Print ready-to-paste configs any time:
 
 ```bash
-npx -y @hedera-insights/mcp config
+npx -y hedera-insights-mcp config
 ```
 
 ### Claude Code / Claude Desktop
@@ -60,7 +60,7 @@ npx -y @hedera-insights/mcp config
   "mcpServers": {
     "hedera-insights": {
       "command": "npx",
-      "args": ["-y", "@hedera-insights/mcp"],
+      "args": ["-y", "hedera-insights-mcp"],
       "env": {
         "HEDERA_ACCOUNT_ID": "0.0.xxxxx",
         "HEDERA_PRIVATE_KEY": "302e...",
@@ -78,7 +78,7 @@ Or via the CLI:
 claude mcp add --transport stdio \
   --env HEDERA_ACCOUNT_ID=0.0.xxxxx --env HEDERA_PRIVATE_KEY=302e... \
   --env AGENT_URL=http://localhost:3001 --env HEDERA_NETWORK=testnet \
-  hedera-insights -- npx -y @hedera-insights/mcp
+  hedera-insights -- npx -y hedera-insights-mcp
 ```
 
 ### OpenCode
@@ -91,7 +91,7 @@ claude mcp add --transport stdio \
   "mcp": {
     "hedera-insights": {
       "type": "local",
-      "command": ["npx", "-y", "@hedera-insights/mcp"],
+      "command": ["npx", "-y", "hedera-insights-mcp"],
       "enabled": true,
       "environment": {
         "HEDERA_ACCOUNT_ID": "0.0.xxxxx",
@@ -129,7 +129,7 @@ comes back with a HashScan proof link.
 
 ```bash
 pnpm install
-pnpm --filter @hedera-insights/mcp build
+pnpm --filter hedera-insights-mcp build
 node packages/mcp/dist/index.js config   # print client configs
 ```
 

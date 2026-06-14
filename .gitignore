@@ -27,3 +27,6 @@ pnpm-debug.log*
 .atl/
 .claude/
 .playwright-mcp/
+
+# npm pack artifacts
+*.tgz

@@ -180,7 +180,7 @@ function printConfigs(): void {
 
   const claude = {
     mcpServers: {
-      "hedera-insights": { command: "npx", args: ["-y", "@hedera-insights/mcp"], env },
+      "hedera-insights": { command: "npx", args: ["-y", "hedera-insights-mcp"], env },
     },
   };
 
@@ -189,7 +189,7 @@ function printConfigs(): void {
     mcp: {
       "hedera-insights": {
         type: "local",
-        command: ["npx", "-y", "@hedera-insights/mcp"],
+        command: ["npx", "-y", "hedera-insights-mcp"],
         enabled: true,
         environment: env,
       },
@@ -205,7 +205,7 @@ function printConfigs(): void {
       "claude mcp add --transport stdio \\",
       "  --env HEDERA_ACCOUNT_ID=0.0.xxxxx --env HEDERA_PRIVATE_KEY=302e... \\",
       `  --env AGENT_URL=${config.agentUrl} --env HEDERA_NETWORK=${config.network} \\`,
-      "  hedera-insights -- npx -y @hedera-insights/mcp",
+      "  hedera-insights -- npx -y hedera-insights-mcp",
       "",
       "# OpenCode  (opencode.json)",
       JSON.stringify(opencode, null, 2),

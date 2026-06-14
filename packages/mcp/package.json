@@ -1,20 +1,44 @@
 {
-  "name": "@hedera-insights/mcp",
+  "name": "hedera-insights-mcp",
   "version": "1.0.0",
-  "private": true,
   "description": "MCP server that lets any AI agent buy Hedera on-chain intelligence over x402 — discovers the catalog, pays in HBAR, and returns verified data.",
   "type": "module",
+  "license": "MIT",
+  "author": "hallzyx",
+  "homepage": "https://github.com/hallzyx/hedzel/tree/main/packages/mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hallzyx/hedzel.git",
+    "directory": "packages/mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/hallzyx/hedzel/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "hedera",
+    "x402",
+    "ai-agent",
+    "agentic-commerce",
+    "hbar",
+    "on-chain"
+  ],
   "bin": {
     "hedera-insights-mcp": "dist/index.js"
   },
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "start": "node dist/index.js",
     "config": "node dist/index.js config",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@hiero-ledger/sdk": "2.79.0",
